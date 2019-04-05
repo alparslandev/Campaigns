@@ -1,6 +1,7 @@
-package com.campaigns.network
+package com.campaigns.injection
 
 import com.campaigns.BuildConfig
+import com.campaigns.network.Api
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
