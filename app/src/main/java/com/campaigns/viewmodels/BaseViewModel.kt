@@ -3,6 +3,7 @@ package com.campaigns.viewmodels
 import androidx.lifecycle.ViewModel
 import com.campaigns.injection.component.ViewModelInjector
 import com.campaigns.injection.NetworkModule
+import com.campaigns.injection.component.DaggerViewModelInjector
 
 abstract class BaseViewModel: ViewModel(){
     private val injector: ViewModelInjector = DaggerViewModelInjector
@@ -19,7 +20,7 @@ abstract class BaseViewModel: ViewModel(){
      */
     private fun inject() {
         when (this) {
-            is ViewModelInjector -> injector.inject(this)
+            is CampaignViewModel -> injector.inject(this)
         }
     }
 }
