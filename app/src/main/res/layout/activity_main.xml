@@ -5,7 +5,7 @@
 
     <data>
         <variable
-                name="model"
+                name="viewModel"
                 type="com.campaigns.viewmodels.CampaignViewModel"/>
     </data>
     <FrameLayout
@@ -24,14 +24,14 @@
                 android:indeterminate="true"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:visibility="@{model.loading}"
+                app:mutableVisibility="@{viewModel.getLoadingVisibility()}"
                 android:layout_gravity="center"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:visibility="@{model.showEmpty}"
+                android:visibility="@{viewModel.showEmpty}"
                 android:text="@string/no_campaigns"/>
 
     </FrameLayout>
