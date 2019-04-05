@@ -16,6 +16,8 @@ class CampaignViewModel: BaseViewModel() {
     @Inject
     lateinit var api: Api
 
+    val errorMessage:MutableLiveData<Int> = MutableLiveData()
+    val errorClickListener = View.OnClickListener { loadCampaigns(0) }
     private val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
     private lateinit var subscription: Disposable
@@ -31,24 +33,27 @@ class CampaignViewModel: BaseViewModel() {
         subscription = api.getCampaigns(page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrievePostListStart() }
-            .doOnTerminate { onRetrievePostListFinish() }
+            .doOnSubscribe { onRetrieveCampaignsStart() }
+            .doOnTerminate { onRetrieveCampaignsFinish() }
             .subscribe(
-                { onRetrievePostListSuccess() },
-                { onRetrievePostListError() }
+                { onRetrieveCampaginsSuccess() },
+                { onRetrieveCampaignsError() }
             )
     }
-    private fun onRetrievePostListError() { }
-
-    private fun onRetrievePostListStart() {
-        loadingVisibility.value = View.VISIBLE
+    private fun onRetrieveCampaignsError() {
+        errorMessage.value = R.string.post_error
     }
 
-    private fun onRetrievePostListFinish() {
+    private fun onRetrieveCampaignsStart() {
+        loadingVisibility.value = View.VISIBLE
+        errorMessage.value = null
+    }
+
+    private fun onRetrieveCampaignsFinish() {
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrievePostListSuccess() { }
+    private fun onRetrieveCampaginsSuccess() { }
 
     override fun onCleared() {
         super.onCleared()
