@@ -1,8 +1,9 @@
-package com.campaigns.viewmodels
+package com.campaigns.ui
 
 import androidx.databinding.ObservableInt
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.campaigns.BaseViewModel
 import com.campaigns.R
 import com.campaigns.adapter.CampaignsAdapter
 import com.campaigns.network.Api

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="position"
+                type="java.lang.Integer"/>
+
+        <variable
+                name="viewModel"
+                type="com.campaigns.ui.CampaignItemViewModel"/>
+    </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/tv_hot_deal_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mutableText="@{viewModel.getHotDeal()}"
+                android:textStyle="bold"
+                android:layout_margin="16dp"
+                android:textSize="20sp"
+                tools:text="Hot Deal #1"/>
+
+        <TextView
+                android:id="@+id/tv_hot_deal_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="16sp"
+                tools:text="7 day 8 hour 7 min Remaining"
+                app:mutableText="@{viewModel.getHotDealTime()}"/>
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@color/colorAccent"
+                tools:layout_height="100dp"/>
+
+    </LinearLayout>
+</layout>

@@ -6,12 +6,12 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.campaigns.viewmodels.CampaignViewModel"/>
+                type="com.campaigns.ui.CampaignViewModel"/>
     </data>
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".MainActivity">
+            tools:context=".ui.MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_campaigns"

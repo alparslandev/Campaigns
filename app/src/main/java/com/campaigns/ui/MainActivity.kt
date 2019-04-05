@@ -1,17 +1,14 @@
-package com.campaigns
+package com.campaigns.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.campaigns.BaseActivity
+import com.campaigns.R
 import com.campaigns.databinding.ActivityMainBinding
-import com.campaigns.viewmodels.CampaignViewModel
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 

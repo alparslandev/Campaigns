@@ -1,9 +1,10 @@
-package com.campaigns.viewmodels
+package com.campaigns
 
 import androidx.lifecycle.ViewModel
 import com.campaigns.injection.component.ViewModelInjector
 import com.campaigns.injection.NetworkModule
 import com.campaigns.injection.component.DaggerViewModelInjector
+import com.campaigns.ui.CampaignViewModel
 
 abstract class BaseViewModel: ViewModel(){
     private val injector: ViewModelInjector = DaggerViewModelInjector
