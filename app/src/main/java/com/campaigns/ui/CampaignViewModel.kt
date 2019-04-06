@@ -1,12 +1,12 @@
 package com.campaigns.ui
 
-import androidx.databinding.ObservableInt
 import android.view.View
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import com.campaigns.BaseViewModel
 import com.campaigns.R
-import com.campaigns.adapter.CampaignsAdapter
 import com.campaigns.network.Api
+import com.campaigns.network.model.Response
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -17,13 +17,12 @@ class CampaignViewModel: BaseViewModel() {
     @Inject
     lateinit var api: Api
 
+    private lateinit var subscription: Disposable
+    var campaignsAdapter: CampaignsAdapter = CampaignsAdapter()
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener { loadCampaigns(0) }
-    private val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
-    private lateinit var subscription: Disposable
-
-    private var adapter = CampaignsAdapter(R.layout.item_campaign, this)
+    var loadingVisibility = ObservableInt(View.GONE)
     var showEmpty = ObservableInt(View.GONE)
 
     init {
@@ -37,7 +36,7 @@ class CampaignViewModel: BaseViewModel() {
             .doOnSubscribe { onRetrieveCampaignsStart() }
             .doOnTerminate { onRetrieveCampaignsFinish() }
             .subscribe(
-                { onRetrieveCampaginsSuccess() },
+                { result -> onRetrieveCampaginsSuccess(result) },
                 { onRetrieveCampaignsError() }
             )
     }
@@ -46,15 +45,22 @@ class CampaignViewModel: BaseViewModel() {
     }
 
     private fun onRetrieveCampaignsStart() {
-        loadingVisibility.value = View.VISIBLE
+        loadingVisibility.set(View.VISIBLE)
         errorMessage.value = null
     }
 
     private fun onRetrieveCampaignsFinish() {
-        loadingVisibility.value = View.GONE
+        loadingVisibility.set(View.GONE)
     }
 
-    private fun onRetrieveCampaginsSuccess() { }
+    private fun onRetrieveCampaginsSuccess(response: Response) {
+        for (counter in response.hotDeals.indices) {
+            val model = response.hotDeals[counter]
+            if (counter < response.banners.size - 1 && response.banners.isNotEmpty())
+                model.image = response.banners[counter].image
+        }
+        campaignsAdapter.updateCampaigns(response.hotDeals)
+    }
 
     override fun onCleared() {
         super.onCleared()
