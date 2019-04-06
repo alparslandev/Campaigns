@@ -12,7 +12,6 @@ import com.campaigns.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
 
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: CampaignViewModel
 
@@ -26,6 +25,6 @@ class MainActivity : BaseActivity() {
         viewModel.errorMessage.observe(this, Observer {
             errorMessage -> if (errorMessage != null) showError(errorMessage, viewModel.errorClickListener, binding.root) else hideError()
         })
-        binding.model = viewModel
+        binding.viewModel = viewModel
     }
 }

@@ -1,9 +1,10 @@
 package com.campaigns
 
 import androidx.lifecycle.ViewModel
-import com.campaigns.injection.component.ViewModelInjector
 import com.campaigns.injection.NetworkModule
 import com.campaigns.injection.component.DaggerViewModelInjector
+import com.campaigns.injection.component.ViewModelInjector
+import com.campaigns.ui.CampaignItemViewModel
 import com.campaigns.ui.CampaignViewModel
 
 abstract class BaseViewModel: ViewModel(){
@@ -21,6 +22,7 @@ abstract class BaseViewModel: ViewModel(){
      */
     private fun inject() {
         when (this) {
+            is CampaignItemViewModel -> injector.inject(this)
             is CampaignViewModel -> injector.inject(this)
         }
     }

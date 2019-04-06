@@ -2,23 +2,23 @@ package com.campaigns.ui
 
 import androidx.lifecycle.MutableLiveData
 import com.campaigns.BaseViewModel
-import com.campaigns.model.Banner
-import com.campaigns.model.HotDeal
+import com.campaigns.network.model.HotDeal
+import com.campaigns.network.model.Image
 
-class CampaignItemViewModel : BaseViewModel() {
+class CampaignItemViewModel: BaseViewModel() {
 
-    fun bind(banner: Banner, hotDeal: HotDeal) {
+    fun bind(image: Image, hotDeal: HotDeal) {
         campaignHotDeal.value = hotDeal
-        campaignBanner.value = banner
+        campaignImage.value = image
     }
 
     companion object {
 
         private val campaignHotDeal = MutableLiveData<HotDeal>()
-        private val campaignBanner = MutableLiveData<Banner>()
+        private val campaignImage = MutableLiveData<Image>()
 
         /*fun getBannerUrl():MutableLiveData<String>{
-            return campaignBanner.value.toString()
+            return campaignImage.value.toString()
         }*/
 
         fun getHotDeal():MutableLiveData<String>{

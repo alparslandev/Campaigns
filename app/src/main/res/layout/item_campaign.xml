@@ -22,7 +22,6 @@
                 android:id="@+id/tv_hot_deal_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:mutableText="@{viewModel.getHotDeal()}"
                 android:textStyle="bold"
                 android:layout_margin="16dp"
                 android:textSize="20sp"
@@ -36,8 +35,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:textSize="16sp"
-                tools:text="7 day 8 hour 7 min Remaining"
-                app:mutableText="@{viewModel.getHotDealTime()}"/>
+                tools:text="7 day 8 hour 7 min Remaining"/>
 
         <ImageView
                 android:layout_width="match_parent"
