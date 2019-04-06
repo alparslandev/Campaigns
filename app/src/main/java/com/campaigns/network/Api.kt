@@ -1,6 +1,6 @@
 package com.campaigns.network
 
-import com.campaigns.model.Model
+import com.campaigns.network.model.Response
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -10,5 +10,5 @@ interface Api {
      *  Get the list of the pots from the API
      */
     @GET("campaigns/{page}")
-    fun getCampaigns(@Path("page") page: Int): Observable<Model>
+    fun getCampaigns(@Path("page") page: Int): Observable<Response>
 }
