@@ -1,5 +1,6 @@
 package com.campaigns.ui
 
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.campaigns.BaseViewModel
 import com.campaigns.network.model.HotDeal
@@ -8,6 +9,7 @@ class CampaignItemViewModel: BaseViewModel() {
 
     private val hotDealMutable = MutableLiveData<String>()
     private val hotDealTimeMutable = MutableLiveData<String>()
+    val resultImageUrl = ObservableField<String>()
 
     private lateinit var campaignHotDeal: HotDeal
 
@@ -15,13 +17,12 @@ class CampaignItemViewModel: BaseViewModel() {
         campaignHotDeal = hotDeal
         hotDealMutable.value = hotDeal.title
         hotDealTimeMutable.value = hotDeal.expirationDate
+        if (hotDeal.image != null && hotDeal.image!!.url.isNotEmpty())
+            resultImageUrl.set(hotDeal.image!!.url + "x" + hotDeal.image!!.height + "x" + hotDeal.image!!.width)
     }
 
-    /*fun getBannerUrl():MutableLiveData<String>{
-        return campaignImage.value.toString()
-    }*/
-
-    fun getHotDeal(): MutableLiveData<String> {
+    fun getHotDeal(position: Int): MutableLiveData<String> {
+        hotDealMutable.value = hotDealMutable.value + " #" + position
         return hotDealMutable
     }
 

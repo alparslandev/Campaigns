@@ -8,6 +8,7 @@ buildscript {
     ext.android_plugin_version = '2.2.0-alpha4'
     repositories {
         google()
+        mavenCentral()
         jcenter()
         
     }

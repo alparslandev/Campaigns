@@ -7,7 +7,7 @@
 
         <variable
                 name="position"
-                type="java.lang.String"/>
+                type="java.lang.Integer"/>
 
         <variable
                 name="viewModel"
@@ -16,7 +16,7 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
         <TextView
                 android:id="@+id/tv_hot_deal_header"
@@ -26,7 +26,7 @@
                 android:layout_margin="16dp"
                 android:textSize="20sp"
                 tools:text="Hot Deals #0"
-                app:mutableText="@{viewModel.getHotDeal()}"/>
+                app:mutableText="@{viewModel.getHotDeal(position)}"/>
 
         <TextView
                 android:id="@+id/tv_hot_deal_time"
@@ -39,9 +39,11 @@
                 app:mutableText="@{viewModel.getHotDealTime()}"/>
 
         <ImageView
+                android:id="@+id/iv_generic_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@color/colorAccent"
+                app:mutableImageSource="@{viewModel.resultImageUrl}"
+                tools:src="@color/colorAccent"
                 tools:layout_height="100dp"/>
 
     </LinearLayout>
