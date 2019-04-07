@@ -3,32 +3,30 @@ package com.campaigns.ui
 import androidx.lifecycle.MutableLiveData
 import com.campaigns.BaseViewModel
 import com.campaigns.network.model.HotDeal
-import com.campaigns.network.model.Image
 
 class CampaignItemViewModel: BaseViewModel() {
 
-    fun bind(image: Image, hotDeal: HotDeal) {
-        campaignHotDeal.value = hotDeal
-        campaignImage.value = image
+    private val hotDealMutable = MutableLiveData<String>()
+    private val hotDealTimeMutable = MutableLiveData<String>()
+
+    private lateinit var campaignHotDeal: HotDeal
+
+    fun bind(hotDeal: HotDeal) {
+        campaignHotDeal = hotDeal
+        hotDealMutable.value = hotDeal.title
+        hotDealTimeMutable.value = hotDeal.expirationDate
     }
 
-    companion object {
+    /*fun getBannerUrl():MutableLiveData<String>{
+        return campaignImage.value.toString()
+    }*/
 
-        private val campaignHotDeal = MutableLiveData<HotDeal>()
-        private val campaignImage = MutableLiveData<Image>()
+    fun getHotDeal(): MutableLiveData<String> {
+        return hotDealMutable
+    }
 
-        /*fun getBannerUrl():MutableLiveData<String>{
-            return campaignImage.value.toString()
-        }*/
-
-        fun getHotDeal():MutableLiveData<String>{
-            return MutableLiveData((campaignHotDeal.value as HotDeal).title)
-        }
-
-        fun getHotDealTime():MutableLiveData<String>{
-            // todo time conversion with Koda
-            val timeStr = campaignHotDeal.value as HotDeal
-            return MutableLiveData(timeStr.title)
-        }
+    fun getHotDealTime(): MutableLiveData<String> {
+        // todo time conversion with Koda
+        return hotDealTimeMutable
     }
 }

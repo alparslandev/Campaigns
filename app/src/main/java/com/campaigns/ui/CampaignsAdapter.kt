@@ -34,7 +34,7 @@ class CampaignsAdapter : RecyclerView.Adapter<CampaignsAdapter.GenericViewHolder
         private val viewModel = CampaignItemViewModel()
 
         fun bind(hotDeal: HotDeal, position: Int) {
-            viewModel.bind(hotDeal.image!!, hotDeal)
+            viewModel.bind(hotDeal)
             //viewModel.fetchCampaignsImagesAt(position)
             binding.setVariable(BR.viewModel, viewModel)
             binding.setVariable(BR.position, position)
