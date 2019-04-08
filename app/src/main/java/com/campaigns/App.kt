@@ -1,15 +1,21 @@
 package com.campaigns
 
 import android.app.Application
-import com.campaigns.injection.ApplicationModule
-import com.campaigns.injection.component.DaggerApplicationInjector
+import android.content.Context
+import androidx.annotation.StringRes
 
 class App : Application() {
+
+    companion object {
+        lateinit var appContext: Context
+        fun str(@StringRes id: Int): String {
+            return if (::appContext.isInitialized) appContext.getString(id) else ""
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
-        val injector = DaggerApplicationInjector.builder()
-            .applicationModule(ApplicationModule(this))
-            .build()
-        injector.inject(this@App)
+        appContext = applicationContext
     }
+
 }

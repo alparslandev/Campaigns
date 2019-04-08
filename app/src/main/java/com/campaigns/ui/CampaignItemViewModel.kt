@@ -2,16 +2,12 @@ package com.campaigns.ui
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import com.campaigns.App
 import com.campaigns.BaseViewModel
 import com.campaigns.network.model.HotDeal
 import com.campaigns.utils.DateFormatUtils
-import javax.inject.Inject
+
 
 class CampaignItemViewModel: BaseViewModel() {
-
-    @Inject
-    lateinit var app: App
 
     private val hotDealMutable = MutableLiveData<String>()
     private val hotDealTimeMutable = MutableLiveData<String>()
@@ -34,7 +30,24 @@ class CampaignItemViewModel: BaseViewModel() {
 
     fun getHotDealTime(): MutableLiveData<String> {
         hotDealTimeMutable.value = DateFormatUtils.remainingTimeToHumanReadableForm(
-            DateFormatUtils.toDate(hotDealTimeMutable.value!!).time, app.applicationContext)
+            System.currentTimeMillis() - DateFormatUtils.toDate(hotDealTimeMutable.value!!).time)
+
+        /*val originalDate = hotDealTimeMutable.value
+        val stringBuilder = StringBuilder()
+
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                val msDiff = System.currentTimeMillis() - DateFormatUtils.toDate(originalDate!!).time
+                stringBuilder.clear()
+                stringBuilder.append(if (msDiff < 0) {
+                    App.str(R.string.no_longer_available)
+                } else {
+                    DateFormatUtils.remainingTimeToHumanReadableForm(msDiff)
+                })
+
+            }
+        }, 0,1000)
+        hotDealTimeMutable.value = stringBuilder.toString()*/
         return hotDealTimeMutable
     }
 }

@@ -8,4 +8,5 @@
     <string name="string_hour">Hour</string>
     <string name="string_minutes">Min</string>
     <string name="string_seconds">Seconds</string>
+    <string name="no_longer_available">Campaign is no longer available</string>
 </resources>
