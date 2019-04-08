@@ -24,9 +24,17 @@ class CampaignsAdapter : RecyclerView.Adapter<CampaignsAdapter.GenericViewHolder
         holder.bind(hotDeals[position], holder.adapterPosition)
     }
 
-    fun updateCampaigns(campaigns:List<HotDeal>){
+    fun setCampaigns(campaigns:List<HotDeal>){
         this.hotDeals = campaigns
         notifyDataSetChanged()
+    }
+
+    fun updateCampaigns(campaigns: List<HotDeal>) {
+        val size = hotDeals.size
+        val list = ArrayList<HotDeal>(hotDeals)
+        list.addAll(campaigns)
+        this.hotDeals = list
+        notifyItemRangeInserted(size, campaigns.size)
     }
 
     inner class GenericViewHolder(val binding: ItemCampaignBinding):

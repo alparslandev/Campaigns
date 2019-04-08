@@ -22,11 +22,20 @@ class CampaignViewModel: BaseViewModel() {
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener { loadCampaigns(0) }
 
+    var page = 0
     var loadingVisibility = ObservableInt(View.GONE)
     var showEmpty = ObservableInt(View.GONE)
 
     init {
-        loadCampaigns(0)
+        loadCampaigns(page)
+    }
+
+    fun isLoading(): Boolean {
+        return loadingVisibility.get() == View.VISIBLE
+    }
+
+    fun updateCampaigns() {
+        loadCampaigns(page)
     }
 
     private fun loadCampaigns(page: Int) {
@@ -56,10 +65,15 @@ class CampaignViewModel: BaseViewModel() {
     private fun onRetrieveCampaginsSuccess(response: Response) {
         for (counter in response.hotDeals.indices) {
             val model = response.hotDeals[counter]
-            if (counter < response.banners.size - 1 && response.banners.isNotEmpty())
+            if (counter < response.banners.size && response.banners.isNotEmpty())
                 model.image = response.banners[counter].image
         }
-        campaignsAdapter.updateCampaigns(response.hotDeals)
+        if (page == 0) {
+            campaignsAdapter.setCampaigns(response.hotDeals)
+        } else {
+            campaignsAdapter.updateCampaigns(response.hotDeals)
+        }
+        page++
     }
 
     override fun onCleared() {
